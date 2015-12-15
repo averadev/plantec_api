@@ -1,0 +1,17 @@
+[07-Oct-2015 16:36:08 America/Chicago] PHP Parse error:  syntax error, unexpected 'SendNotificationPush' (T_STRING), expecting variable (T_VARIABLE) in /home/geek/public_html/booking/application/controllers/api.php on line 339
+[07-Oct-2015 16:36:17 America/Chicago] PHP Parse error:  syntax error, unexpected 'SendNotificationPush' (T_STRING), expecting variable (T_VARIABLE) in /home/geek/public_html/booking/application/controllers/api.php on line 339
+[12-Nov-2015 12:23:30 America/Chicago] PHP Fatal error:  Function name must be a string in /home/geek/public_html/booking/application/controllers/api.php on line 207
+[30-Nov-2015 12:39:33 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:34 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:35 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:36 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:36 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:36 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:46 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:47 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:47 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:39:48 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:40:56 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:41:06 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[30-Nov-2015 12:41:32 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
+[14-Dec-2015 17:14:00 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/geek/public_html/booking/application/models/api_db.php on line 260
