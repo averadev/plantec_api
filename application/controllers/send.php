@@ -146,7 +146,8 @@ class Send extends CI_Controller {
 				'empleadosId'	=> $this->session->userdata('id'),
 				'asunto'		=> $_POST['subject'],
 				'mensaje'		=> $_POST['message'],
-				'fechaHora'		=> $strHoy
+				'fechaHora'		=> $strHoy,
+				'status'		=> 1
 			);
 			
 			$data = $this->send_db->insertMessageOfAdmin($messageAdmin);
@@ -178,8 +179,6 @@ class Send extends CI_Controller {
 					//$idXrefMessage = array();
 				}
 				
-				
-				
 				foreach($condominium as $item){
 					array_push($xrefMessage, array(
 						'catNotificacionesAdminId'	=> $data,
@@ -198,12 +197,13 @@ class Send extends CI_Controller {
 			
 					if(count($user) > 0){
 						foreach($user as $userId){
-							$playerIdA = array();
-							if($userId->playerId != 0){
-								array_push($playerIdA, $userId->playerId);
+							if($userId->playerId != 0 || $userId->playerId != '0'){
+								usleep(10000);
+								$playerIdArray = [$userId->playerId];	
+								$this->SendNotificationMAPush($playerIdArray, $data);
 							}
 						}
-						$this->SendNotificationMAPush($playerIdA, $data);
+						
 					}
 					
 					$cont++;
@@ -226,7 +226,7 @@ class Send extends CI_Controller {
 		$idMSGNew = $idMSGNew . "";
 		
 		//$userID = [$playerId]; 
-		$userID = $playerId; 
+		//$userID = $playerId; 
 		$massage = "mensaje";
 	  
 		$content = array(
@@ -236,7 +236,7 @@ class Send extends CI_Controller {
 		$fields = array(
 		'app_id' => "d55cca2a-694c-11e5-b9d4-c39860ec56cd",
 		//'included_segments' => array('All'),
-		'include_player_ids' => $userID,
+		'include_player_ids' => $playerId,
 		'data' => array("type" => '2', "id" => $idMSGNew),
 		'isAndroid' => true,
 		'contents' => $content
@@ -246,7 +246,7 @@ class Send extends CI_Controller {
 		//print("\nJSON sent:\n");
 		// print($fields);
 		
-		$this->send_db->updateMSGAStatusSent($idMSGNew);
+		//$this->send_db->updateMSGAStatusSent($idMSGNew);
 		
 		$ch = curl_init();
 	
@@ -267,7 +267,7 @@ class Send extends CI_Controller {
 		$pos = strpos($return, $findme);
 	
 		if ($pos === false) {
-			$this->send_db->updateMSGAStatusReceived($idMSGNew);
+			//$this->send_db->updateMSGAStatusReceived($idMSGNew);
 		}
 	
 		curl_close($ch);

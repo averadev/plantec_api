@@ -42,7 +42,8 @@ class Api extends REST_Controller {
 				endforeach;
 				$items2 = $this->api_db->getCondominium($data[0]->residencialId);
 				$items3 = $this->api_db->getResidential($data[0]->residencialId);
-                $message = array('success' => true, 'message' => 'Usuario correcto', 'items' => $data, 'items2' => $items, 'items3' => $items2, 'items4' => $items3);
+                $asuntos = $this->api_db->getAsuntos($data[0]->residencialId);
+                $message = array('success' => true, 'message' => 'Usuario correcto', 'items' => $data, 'items2' => $items, 'items3' => $items2, 'items4' => $items3, 'asuntos' => $asuntos);
             }else{
                 $message = array('success' => false, 'message' => 'El usuario o password es incorrecto.');
             }
@@ -64,8 +65,8 @@ class Api extends REST_Controller {
             if (count($data) > 0){
 				if (count($data) == 1){
 					$this->api_db->setIdPlayerUser($data[0]->id, $this->get('playerId'));
-					$residencial = $this->api_db->getResidential($data[0]->residencialId);
 				}
+				$residencial = $this->api_db->getResidential($data[0]->residencialId);
 				
                 $message = array('success' => true, 'message' => 'Usuario correcto', 'items' => $data, 'residencial' => $residencial);
             }else{
@@ -147,8 +148,6 @@ class Api extends REST_Controller {
 			$hoy = getdate();
 			$strHoy = $hoy["year"]."-".$hoy["mon"]."-".$hoy["mday"] . " " . $hoy["hours"].":".$hoy["minutes"].":".$hoy["seconds"];
 			
-			
-			
 			$insert = array(
 				'empleadosId' 			=> $this->get('idGuard'),
 				'asunto' 				=> $this->get('subject'),
@@ -158,6 +157,7 @@ class Api extends REST_Controller {
 				'enviadoUltimoIntento' 	=> $strHoy,
 				'recibido' 				=> 0,
 				'leido' 				=> 0,
+				'status' 				=> 1
 			);
 			
 			$idMSGNew = $this->api_db->saveMessageGuard($insert);
@@ -190,6 +190,7 @@ class Api extends REST_Controller {
 				'recibido' 				=> 0,
 				'leido' 				=> 0,
 				'proveedor' 			=> $this->get('provider'),
+				'status' 				=> 1
 			);
 			
 			$idMSGNew = $this->api_db->saveRecordVisit($insert);
@@ -199,7 +200,8 @@ class Api extends REST_Controller {
 			$user = $this->api_db->getUserByCondominioId($this->get('condominiosId'));
 			
 			if( count($user) > 0){
-				if($user[0]->playerId != 0){
+				if($user[0]->playerId != 0 || $user[0]->playerId != '0'){
+					usleep(10000);
 					$this->SendNotificationPush($user[0]->playerId, $idMSGNew, "1");
 					
 				}
@@ -414,6 +416,31 @@ class Api extends REST_Controller {
 			$this->api_db->deleteMsgAdmin($admin);
 			
 			$message = array('success' => true, 'message' => 'Mensajes eliminados');
+        }
+        $this->response($message, 200);
+	}
+	
+	/**
+	 * Guarda los datos del mensaje seguridad
+	 */
+	public function saveSuggestion_get(){
+		$message = $this->verifyIsSet(array('idApp'));
+        if ($message == null) {
+			
+			$hoy = getdate();
+			$strHoy = $hoy["year"]."-".$hoy["mon"]."-".$hoy["mday"] . " " . $hoy["hours"].":".$hoy["minutes"].":".$hoy["seconds"];
+			
+			$insert = array(
+				'residenteId' 			=> $this->get('idApp'),
+				'asunto' 				=> $this->get('subject'),
+				'mensaje' 				=> $this->get('message'),
+				'fechaHora' 			=> $strHoy,
+				'leido' 				=> 0,
+				'status' 				=> 1
+			);
+			
+			$this->api_db->saveSuggestion($insert);
+			$message = array('success' => true, 'message' => 'Mensaje enviado');
         }
         $this->response($message, 200);
 	}

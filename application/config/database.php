@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'geek';
-$db['default']['password'] = 'n0rris';
-$db['default']['database'] = 'geek_booking';
+$db['default']['username'] = 'plantecs_root';
+$db['default']['password'] = 'plantec2015';
+$db['default']['database'] = 'plantecs_main';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

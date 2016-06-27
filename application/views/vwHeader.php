@@ -51,6 +51,12 @@
 						</div>
 						<p>Reportes</p>
 					</li></a>
+					<a href="<?php echo base_url(); ?>suggestion"><li <?php echo  $pg =='suggestion' ? 'class="active"' : '' ?>>
+						<div class="imgIconHeader" id="iconSuggestion">
+							<img src="assets/img/web/sugerencias.png">
+						</div>
+						<p>Sugerencias</p>
+					</li></a>
 					<a href="<?php echo base_url(); ?>send"><li <?php echo  $pg =='send' ? 'class="active"' : '' ?>>
 						<div class="imgIconHeader" id="iconSendHeader">
 							<img src="assets/img/web/iconSend.png">

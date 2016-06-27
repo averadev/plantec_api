@@ -15,3 +15,5 @@
 [30-Nov-2015 12:41:06 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
 [30-Nov-2015 12:41:32 America/Chicago] PHP Fatal error:  Cannot redeclare api_db::getResidential() in /home/geek/public_html/booking/application/models/api_db.php on line 137
 [14-Dec-2015 17:14:00 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/geek/public_html/booking/application/models/api_db.php on line 260
+[16-Dec-2015 12:24:39 America/Chicago] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home/geek/public_html/booking/application/models/api_db.php on line 298
+[16-Dec-2015 12:24:56 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/geek/public_html/booking/application/models/api_db.php on line 284

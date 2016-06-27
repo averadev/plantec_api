@@ -35,26 +35,23 @@ html,body {
 body {
 	/*background:#86B4CC;*/
 	
-	background: rgba(11,47,93,1);
-	background: -moz-linear-gradient(left, rgba(11,47,93,1) 0%, rgba(6,37,66,1) 100%);
-	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(11,47,93,1)), color-stop(100%, rgba(6,37,66,1)));
-	background: -webkit-linear-gradient(left, rgba(11,47,93,1) 0%, rgba(6,37,66,1) 100%);
-	background: -o-linear-gradient(left, rgba(11,47,93,1) 0%, rgba(6,37,66,1) 100%);
-	background: -ms-linear-gradient(left, rgba(11,47,93,1) 0%, rgba(6,37,66,1) 100%);
-	background: linear-gradient(to right, rgba(11,47,93,1) 0%, rgba(6,37,66,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b2f5d', endColorstr='#062542', GradientType=1 );
-    background: url('../../assets/img/web/patternLogin.png');
+	background: rgb(255,255,255);
 	
 }
 
+#login-left{
+    background: url('../../assets/img/web/bg.png') no-repeat;
+    background-size: 420px auto;
+}
+
 #bgFormLogin{
-	background: rgba(138, 184, 204, 0.9);
+	
     height: 300px;
     margin: 0;
     padding: 0;
     margin-top: 15%;
     border-radius: 7px 7px 7px 7px;
-    box-shadow: 5px 11px 3px #111;
+    /*box-shadow: 5px 11px 3px #111;*/
 }
 
 #headerFormLogin{
@@ -100,7 +97,7 @@ body {
 }
 
 span.prefix{
-	background:#004790;
+	background:rgb(193,193,193);
 	line-height:0;
 }
 
@@ -110,8 +107,12 @@ span.prefix{
 }
 
 #btnlogin{
-	background:#004790;
+	background:rgb(224,224,224);
+    color: rgb(132,132,132);
+    width: 100%;
 	font-family:Lato-Regular;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 #btnlogin:hover{
@@ -133,6 +134,10 @@ span.prefix{
 /******************Login admin*********************/
 /**************************************************/
 
+.login-content{
+    margin-left: 0;
+}
+
 #bodyAdmin{
 	background:#FFFFFF;
 }
@@ -145,4 +150,30 @@ span.prefix{
     margin-top: 15%;
     border-radius: 7px 7px 7px 7px;
     box-shadow: 5px 11px 3px #D9D7D7;
+}
+
+#row-textfield-login{
+    border: 5px solid rgb(234,234,234);
+    border-radius: 5px;
+}
+
+#txtEmail{
+    margin:0;
+}
+
+#txtPassword{
+    margin:0;
+}
+
+.espacio{
+    max-height: 10px;
+}
+
+.separador{
+    border-top: 2px solid rgb(234,234,234);
+    max-height: 10px;
+}
+
+.body-bottom{
+    border-top: 2px solid rgb(139,139,139);
 }

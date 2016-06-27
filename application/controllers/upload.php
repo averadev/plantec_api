@@ -104,6 +104,7 @@ class Upload extends CI_Controller {
 					$result = rename($tmpfname, "assets/img/app/visit/" . $filename);  
 					if ($result) {
 						http_response_code(201);
+						chmod("assets/img/app/visit/" . $filename, 0644);
 						echo json_encode("File Created " . $filename);
 					} else {
 						http_response_code(403);

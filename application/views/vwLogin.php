@@ -1,8 +1,7 @@
-
 <!doctype html>
 <html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+        
         <title>Booking</title>
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<?php echo base_url().FOUND; ?>css/foundation.css" />
@@ -11,12 +10,11 @@
     </head>
     <body>      
         
-        <div class="row">
-  			<div class="small-1 medium-3 large-3 columns">&nbsp;</div>
-            <!--<div class="small-10 medium-6 large-6 columns">
-            	<img src="assets/img/web/logo.png" />
-            </div>-->
-  			<div class="small-10 medium-6 large-6 columns" id="bgFormLogin" >
+        <div class="row login-content">
+  			<div id="login-left" class="small-4 medium-6 large-8 columns">
+                <img src="../../assets/img/web/bg-chavo.png" style="padding-left: 170px;">
+            </div>
+  			<div class="small-8 medium-6 large-4 columns" id="bgFormLogin" >
             	<div id="headerFormLogin" class="small-12 medium-12 large-12 columns">
 					<div id="imgLogoLogin">
 						<img src="assets/img/web/logoPlantec2.png">
@@ -36,45 +34,50 @@
                             	<div class="small-1 medium-1 large-1 columns">&nbsp;</div>
                        		</div>
 							
-							<div class="row collapse">
-								<div class="small-1 medium-1 large-2 columns">&nbsp;</div>
-								<div class="small-2 large-1 columns">
+                            <div class="row espacio">&nbsp;</div>
+                            <div class="row separador">&nbsp;</div>
+                            
+							<div class="row collapse" id="row-textfield-login">
+								<div class="small-2 large-2 columns">
 									<span class="prefix" class="bodyIconFormLogin"><img src="assets/img/web/icono-user.png" class="iconFormLogin"></span>
 								</div>
-								<div class="small-8 large-7 columns">
-									<input type="text" id="txtEmail" placeholder="Correo del administrador">
+								<div class="small-10 large-10 columns">
+									<input type="text"  id="txtEmail" placeholder="Correo del administrador">
 								</div>
-								<div class="small-1 medium-1 large-2 columns">&nbsp;</div>
 							</div>
-							
-							<div class="row collapse">
-								<div class="small-1 medium-1 large-2 columns">&nbsp;</div>
-								<div class="small-2 large-1 columns">
+                            <div class="row">&nbsp;</div>
+							<div class="row collapse" id="row-textfield-login">
+								<div class="small-2 large-2 columns">
 									<span class="prefix" class="bodyIconFormLogin"><img src="assets/img/web/icono-password.png" class="iconFormLogin"></span>
 								</div>
-								<div class="small-8 large-7 columns">
-									<input type="password" id="txtPassword" placeholder="Contraseña del administrador">
+								<div class="small-10 large-10 columns">
+									<input type="password"  id="txtPassword" placeholder="Contraseña del administrador">
 								</div>
-								<div class="small-1 medium-1 large-2 columns">&nbsp;</div>
 							</div>
 							
+                            <div class="row espacio">&nbsp;</div>
+                            <div class="row separador">&nbsp;</div>
+                            
 							<div class="row">
-                        		<div class="small-1 medium-1 large-1 columns">&nbsp;</div>
-                        			<div class="small-10 medium-10 large-10 columns" style="text-align:center;">
-                            			<a id="btnlogin" class="button">Ingresar</a>
+                        			<div class="small-12 medium-12 large-12 columns" style="text-align:center;">
+                            			<a id="btnlogin" class="button">INGRESAR</a>
                            			</div>
-                            	<div class="small-1 medium-1 large-1 columns">&nbsp;</div>
                        		</div>
                         
                         </div>
                     </div>
-					<div id="footerFormLogin" class="small-12 medium-12 large-12 columns"></div>
+					<!--<div id="footerFormLogin" class="small-12 medium-12 large-12 row"></div>-->
 
                 
             </div>
-  			<div class="small-1 medium-3 large-3 columns">&nbsp;</div>
 		</div>
-		
+		<div class="row login-bottom">
+            <div class="small-2 medium-2 large-2 columns">&nbsp;</div>
+            <div class="small-8 medium-8 large-8 columns body-bottom">
+                &iquest;TE INTERESA ESTE SERVICIO&#63; &iexcl;COMUNICATE CON NOSOTROS&#33;
+            </div>
+            <div class="small-2 medium-2 large-2 columns">&nbsp;</div>
+        </div>
 	</body>
 		
 	<script>

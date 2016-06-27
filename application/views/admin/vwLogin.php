@@ -6,7 +6,7 @@
         <title>Booking</title>
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<?php echo base_url().FOUND; ?>css/foundation.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/login.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/login-admin.css" />
 		
     </head>
     <body id="bodyAdmin">      

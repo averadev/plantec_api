@@ -132,6 +132,15 @@ Class api_db extends CI_MODEL
 	}
 	
 	/**
+	 * Obtiene la lista de asuntos
+	 */
+	public function getAsuntos($id){
+        $this->db->from('cat_asunto');
+        $this->db->where('status = 1');
+        return $this->db->get()->result();
+	}
+	
+	/**
 	 * Inserta los datos del mensaje
 	 */
     public function saveMessageGuard($data){
@@ -255,10 +264,17 @@ Class api_db extends CI_MODEL
 			$this->db->limit(1);
 			$data2 = $this->db->get()->result();
 			
+			$this->db->select('empleados.nombre, empleados.apellidos, empleados.foto, empleados.residencialId');
+			$this->db->from('empleados');
+			$this->db->where('empleados.residencialId = ', $idResidencial[0]->residencialId);
+			$this->db->order_by('empleados.id DESC'); 
+			$this->db->limit(1);
+			$data3 = $this->db->get()->result();
+			
 			if(count($data1) > 0 && count($data2) == 0){
 				return $data1;
 			}else if(count($data1) == 0 && count($data2) > 0){
-				return $data1;
+				return $data2;
 			}else if(count($data1) > 0 && count($data2) > 0){
 				if($data1[0]->fechaHora >= $data2[0]->fechaHora){
 					return $data1;
@@ -266,13 +282,21 @@ Class api_db extends CI_MODEL
 					return $data2;
 				}
 			}
+			else if(count($data3)){
+				return $data3;
+			}
 		
 		}else{
 			return array();
 		}
-		
-		
 	}
+	
+	/**
+	 * Inserta los datos de la queja
+	 */
+    public function saveSuggestion($data){
+        $this->db->insert('cat_quejas_sugerencias', $data);
+    }
 	
 	/**
 	 * actualiza el playerId del usuario

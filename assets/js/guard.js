@@ -9,6 +9,7 @@
 var dialogGuard;
 var isButtonModal = true;
 var idGuard = 0;
+var lokedButton = 0;
 
 //////////////index//////////////
 
@@ -50,6 +51,7 @@ $(function() {
 				"class": 'dialogButtonAceptar',
 				click: function() {
 					if(isButtonModal){
+						isButtonModal = false;
 						addGuard();
 					}
 				}
@@ -99,8 +101,8 @@ function addGuard(){
 			}
 			
 		}
-		
-		//
+	}else{
+		isButtonModal = true
 	}
 }
 

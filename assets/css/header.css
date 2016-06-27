@@ -49,12 +49,10 @@ header nav #navLogout{
 }
 
 #contNavLogout{
-	
 	margin: 0 auto;
 	position:relative;
 	width:990px;
 	background:none;
-	
 }
 
 #contBtnLogOut{
@@ -104,7 +102,7 @@ header nav #navMenu{
 	margin: 0 auto;
 	position:relative;
 	list-style:none;
-	width:990px;
+	width:1125px;
 	color:#DCE0E5;
 	background:none;
 	height:130px;
@@ -164,6 +162,10 @@ header nav #navMenu{
 	padding-top:25px;
 }
 
+#iconSuggestion{
+	padding-top:22px;
+}
+
 #iconCondoHeader{
 	padding-top:15px;
 }
@@ -190,13 +192,16 @@ header nav #navMenu{
 	#navMenu ul{
 		width:100%;
 		margin-left:0;
-		background:#854123;
 	}
 	
 	#navMenu ul a li{
 		float:left;
-		width:13%;
+		width:11%;
 	}
+	
+	#navMenu ul a li p{
+	font-size:18px;
+}
 	
 	#navMenu ul a #imgLogo{
 		width:20%;
