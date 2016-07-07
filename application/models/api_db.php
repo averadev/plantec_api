@@ -39,6 +39,24 @@ Class api_db extends CI_MODEL
         $this->db->where('email', $email);
         return $this->db->get()->result();
     }
+ 
+    /**
+     * verifica si el usuario ya se ha registrado
+     */
+    public function getIdsOneSignal($residencialId){
+        $this->db->from('empleados');
+        $this->db->where('residencialId', $residencialId);
+        return $this->db->get()->result();
+    }
+    
+    
+    /**
+     * Actualizacion del id OneSignal
+     */
+    public function updateAdminOS($id, $idOneSignal){
+        $this->db->where('id', $id);
+        $this->db->update('empleados', array('idOneSignal' => $idOneSignal));
+    }
 	
 	/**
      * veridica si el correo y password existen
@@ -171,6 +189,21 @@ Class api_db extends CI_MODEL
 		$this->db->where('xref_notificaciones_condominio.status = 1');
         return $this->db->get()->result();
     }
+    
+    /**
+     * veridica si el correo y password existen
+     */
+    public function getNotif($residencialId){
+        $this->db->select('registro_visitas.id, condominios.nombre, registro_visitas.action');
+        $this->db->from('registro_visitas');
+        $this->db->join('condominios', 'registro_visitas.condominiosId = condominios.id');
+        $this->db->where('condominios.residencialId', $residencialId);
+        $this->db->where('registro_visitas.action > 0');
+        $this->db->order_by('registro_visitas.id', 'desc'); 
+        $this->db->group_by('registro_visitas.id'); 
+        $this->db->limit(5);
+        return $this->db->get()->result();
+    }
 	
 	/**
      * veridica si el correo y password existen
@@ -199,7 +232,7 @@ Class api_db extends CI_MODEL
 	 * Obtiene la informacion de visitantes por condominio
 	 */
 	public function getMessageToVisitById($id){
-		$this->db->select('registro_visitas.id, registro_visitas.nombreVisitante, registro_visitas.motivo, registro_visitas.fechaHora, registro_visitas.enviadoUltimoIntento, registro_visitas.leido');
+		$this->db->select('registro_visitas.id, registro_visitas.nombreVisitante, registro_visitas.motivo, registro_visitas.fechaHora, registro_visitas.enviadoUltimoIntento, registro_visitas.action, registro_visitas.leido');
         $this->db->from('registro_visitas');
         $this->db->where('registro_visitas.id', $id);
 		//$this->db->where('registro_visitas.leido = 0');
@@ -379,6 +412,14 @@ Class api_db extends CI_MODEL
 			$this->db->update('residente', $data);
 		}
 		
+	}
+	
+	/**
+	 * Actualiza el estado recibido de los mensajes
+	 */
+	public function updateVisitAction($id, $action){
+		$this->db->where('id', $id);
+        $this->db->update('registro_visitas', array('action' => $action));
 	}
 	
 	/**

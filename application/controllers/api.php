@@ -36,8 +36,11 @@ class Api extends REST_Controller {
             // Obtener cupones
             $data = $this->api_db->verifyEmailPassAdmin($this->get('email'), $this->get('password'));
             if (count($data) > 0){
+                // Guardar OneSignal
+                $this->api_db->updateAdminOS($data[0]->id, $this->get('idOneSignal'));
+                
 				$items = $this->api_db->getInfoGuard($data[0]->residencialId);
-					foreach ($items as $item):
+				foreach ($items as $item):
 					$item->path = 'assets/img/app/user/';
 				endforeach;
 				$items2 = $this->api_db->getCondominium($data[0]->residencialId);
@@ -88,6 +91,32 @@ class Api extends REST_Controller {
 			$message = array('success' => true, 'message' => 'Condominio asignado.', 'items' => $data);
         }
         $this->response($message, 200);
+    }
+	
+	/**
+	 * Actualiza el playerId de los usuario
+	 */
+	public function getNotif_get() { 
+        $items = $this->api_db->getNotif($this->get('residencial'));
+        $this->response(array('success' => true, 'items' => $items), 200);
+    }
+	
+	/**
+	 * Actualiza el playerId de los usuario
+	 */
+	public function updateVisitAction_get() { 
+        $this->api_db->updateVisitAction($this->get('idMSG'), $this->get('action'));
+        // Mandar notificacion guardia
+        if ($this->get('action') == "2" || $this->get('action') == "3"){
+            $data = $this->api_db->getIdsOneSignal($this->get('residencial'));
+            foreach ($data as $item):
+                if (isset($item->idOneSignal)) {
+                    $this->SendNotificationSecurity($item->idOneSignal, $this->get('action'), "d5a06f1e-b4c1-424a-8964-52458c9045a6");
+                }
+            endforeach;
+            
+        }
+        $this->response(array('success' => true), 200);
     }
 	
 	/**
@@ -190,6 +219,7 @@ class Api extends REST_Controller {
 				'recibido' 				=> 0,
 				'leido' 				=> 0,
 				'proveedor' 			=> $this->get('provider'),
+                'action' 				=> 0,
 				'status' 				=> 1
 			);
 			
@@ -202,7 +232,7 @@ class Api extends REST_Controller {
 			if( count($user) > 0){
 				if($user[0]->playerId != 0 || $user[0]->playerId != '0'){
 					usleep(10000);
-					$this->SendNotificationPush($user[0]->playerId, $idMSGNew, "1");
+					$this->SendNotificationPush($user[0]->playerId, $idMSGNew, "1", "d55cca2a-694c-11e5-b9d4-c39860ec56cd");
 					
 				}
 			}
@@ -446,11 +476,60 @@ class Api extends REST_Controller {
 	}
 	
 	 /************** metodo generico ******************/
+    
+    /**
+	 * Envia las notificaciones push
+	 */
+	public function SendNotificationSecurity($playerId, $typeMSG, $idAppOneSignal){
+		
+		
+		$userID = [$playerId]; 
+		if($typeMSG == "2"){
+			$massage = "Acceso Aceptado";
+		}elseif($typeMSG == "3"){
+			$massage = "Acceso Negado";
+		}
+	  
+		$content = array(
+			"en" => $massage
+		);
+    
+		$fields = array(
+		'app_id' => $idAppOneSignal,
+		//'included_segments' => array('All'),
+		'include_player_ids' => $userID,
+		'data' => array("type" => $typeMSG, "id" => ""),
+		'isAndroid' => true,
+		'contents' => $content
+		);
+    
+		$fields = json_encode($fields);
+		$ch = curl_init();
+	
+		curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+                           'Authorization: Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+		$response = curl_exec($ch);
+		$return["allresponses"] = $response;
+		$return = json_encode($return);
+  
+		$findme   = 'error';
+		$pos = strpos($return, $findme);
+	
+		curl_close($ch);
+		
+	}
 	 
 	/**
 	 * Envia las notificaciones push
 	 */
-	public function SendNotificationPush($playerId, $idMSGNew, $typeMSG){
+	public function SendNotificationPush($playerId, $idMSGNew, $typeMSG, $idAppOneSignal){
 		
 		$idMSGNew = $idMSGNew . "";
 		
@@ -464,7 +543,7 @@ class Api extends REST_Controller {
 		);
     
 		$fields = array(
-		'app_id' => "d55cca2a-694c-11e5-b9d4-c39860ec56cd",
+		'app_id' => $idAppOneSignal,
 		//'included_segments' => array('All'),
 		'include_player_ids' => $userID,
 		'data' => array("type" => $typeMSG, "id" => $idMSGNew),
