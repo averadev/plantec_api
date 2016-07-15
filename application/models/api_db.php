@@ -198,10 +198,10 @@ Class api_db extends CI_MODEL
         $this->db->from('registro_visitas');
         $this->db->join('condominios', 'registro_visitas.condominiosId = condominios.id');
         $this->db->where('condominios.residencialId', $residencialId);
-        $this->db->where('registro_visitas.action > 0');
+        $this->db->where('registro_visitas.action >= 0');
         $this->db->order_by('registro_visitas.id', 'desc'); 
         $this->db->group_by('registro_visitas.id'); 
-        $this->db->limit(5);
+        $this->db->limit(8);
         return $this->db->get()->result();
     }
 	
